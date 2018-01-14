@@ -1,2 +1,3 @@
 # tic-tac-toe
-A tic-tac-toe game created using react
+
+ A tic-tac-toe game created using react.
