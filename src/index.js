@@ -5,7 +5,7 @@ import Board from './components/board.jsx';
 
 const App = () => {
 	return (
-        <div>
+        <div className="wrapper">
             <Header/>
             <Board/>
         </div>
