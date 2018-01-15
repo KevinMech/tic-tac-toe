@@ -7,12 +7,13 @@
 .wrapper{
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
 }
 
 .header {
     display: flex;
     justify-content: center;
+    align-self: stretch;
 
     background-color: #FEC606;
     padding: 10px;
@@ -22,11 +23,10 @@
 
 .board {
     display: flex;
-    align-self: center;
     justify-content: space-between;
     flex-wrap: wrap;
 
-    margin: 20px 0 0 0;
+    margin: 40px;
     height: 500px;
     width: 500px;
 /*    border: 1px solid;*/
@@ -42,5 +42,27 @@
 }
 
 .board > div:hover{
+    background-color: #FEC606;
+}
+
+.selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 500px;
+}
+
+.selector > button {
+    border-radius: 6px;
+    height: 30px;
+    width: 50%;
+}
+
+.itemx {
+    background-color: #888888;
+}
+
+.itemo {        
     background-color: #FEC606;
 }
