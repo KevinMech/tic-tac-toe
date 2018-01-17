@@ -3,21 +3,28 @@ import ReactDom from 'react-dom';
 import Header from './components/header.jsx';
 import Board from './components/board.jsx';
 import Selector from './components/selector.jsx';
+import Notification from './components/notification.jsx'
 
 class App extends React.Component {
     constructor(){
         super();
-
         this.handleSelection = this.handleSelection.bind(this);
+        
+        //enum for notification box options
+        this.notification = {
+            selectSymbol: <Selector handleSelection = {this.handleSelection}/>,
+            yourturn: <Notification text = {"Your Turn!"}/>
+        }
 
         this.state = {
-            selector: <Selector handleSelection = {this.handleSelection}/>,
-            symbol: null
+            symbol: null,
+            notification: this.notification.selectSymbol
         }
     }
 
-    handleSelection(symbol){
-
+    handleSelection(selection){
+        this.setState({symbol: selection,
+            notification: this.notification.yourturn});
     }
 
     render(){
@@ -25,7 +32,7 @@ class App extends React.Component {
             <div className="wrapper">
                 <Header/>
                 <Board/>
-                {this.state.selector}
+                {this.state.notification}
             </div>
         );
     }
