@@ -4,14 +4,31 @@ import Header from './components/header.jsx';
 import Board from './components/board.jsx';
 import Selector from './components/selector.jsx';
 
-const App = () => {
-	return (
-        <div className="wrapper">
-            <Header/>
-            <Board/>
-            <Selector/>
-        </div>
+class App extends React.Component {
+    constructor(){
+        super();
+
+        this.handleSelection = this.handleSelection.bind(this);
+
+        this.state = {
+            selector: <Selector handleSelection = {this.handleSelection}/>,
+            symbol: null
+        }
+    }
+
+    handleSelection(symbol){
+
+    }
+
+    render(){
+        return (
+            <div className="wrapper">
+                <Header/>
+                <Board/>
+                {this.state.selector}
+            </div>
         );
+    }
 }
 
 ReactDom.render(<App/>, document.getElementById('root'));
