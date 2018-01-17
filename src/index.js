@@ -18,13 +18,28 @@ class App extends React.Component {
 
         this.state = {
             symbol: null,
+            playersturn: false,
             notification: this.notification.selectSymbol
         }
     }
 
     handleSelection(selection){
-        this.setState({symbol: selection,
-            notification: this.notification.yourturn});
+        this.setState({symbol: selection});
+        this.selectFirstPlayer();
+    }
+
+    selectFirstPlayer(){
+        let selection = Math.round(Math.random());
+        if(selection === 0) this.playersTurn();
+        else this.computersTurn();
+    }
+
+    playersTurn(){
+        console.log('player');
+    }
+
+    computersTurn(){
+        console.log('computer');
     }
 
     render(){
