@@ -3,12 +3,13 @@ import ReactDom from 'react-dom';
 import Header from './components/header.jsx';
 import Board from './components/board.jsx';
 import Selector from './components/selector.jsx';
-import Notification from './components/notification.jsx'
+import Notification from './components/notification.jsx';
 
 class App extends React.Component {
     constructor(){
         super();
         this.handleSelection = this.handleSelection.bind(this);
+        this.handleTileClick = this.handleTileClick.bind(this);
         
         //enum for notification box options
         this.notification = {
@@ -18,7 +19,7 @@ class App extends React.Component {
 
         this.state = {
             symbol: null,
-            playersturn: false,
+            playersTurn: false,
             notification: this.notification.selectSymbol
         }
     }
@@ -28,6 +29,10 @@ class App extends React.Component {
         this.selectFirstPlayer();
     }
 
+    handleTileClick(tile){
+        console.log('hello');
+    }
+
     selectFirstPlayer(){
         let selection = Math.round(Math.random());
         if(selection === 0) this.playersTurn();
@@ -35,7 +40,8 @@ class App extends React.Component {
     }
 
     playersTurn(){
-        console.log('player');
+        this.setState({playersTurn: true,
+            notification: this.notification.yourturn});
     }
 
     computersTurn(){
@@ -46,7 +52,7 @@ class App extends React.Component {
         return (
             <div className="wrapper">
                 <Header/>
-                <Board/>
+                <Board handleTileClick = {this.handleTileClick}/>
                 {this.state.notification}
             </div>
         );
