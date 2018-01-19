@@ -8,29 +8,29 @@ import Notification from './components/notification.jsx';
 class App extends React.Component {
     constructor(){
         super();
-        this.handleSelection = this.handleSelection.bind(this);
+        this.handleSymbolSelection = this.handleSymbolSelection.bind(this);
         this.handleTileClick = this.handleTileClick.bind(this);
         
         //enum for notification box options
         this.notification = {
-            selectSymbol: <Selector handleSelection = {this.handleSelection}/>,
+            selectSymbol: <Selector handleSymbolSelection = {this.handleSymbolSelection}/>,
             yourturn: <Notification text = {"Your Turn!"}/>
         }
 
         this.state = {
-            symbol: null,
+            playerSymbol: null,
             playersTurn: false,
             notification: this.notification.selectSymbol
         }
     }
 
-    handleSelection(selection){
-        this.setState({symbol: selection});
+    handleSymbolSelection(selection){
+        this.setState({playerSymbol: selection});
         this.selectFirstPlayer();
     }
 
     handleTileClick(tile){
-        console.log('hello');
+        console.log('click');
     }
 
     selectFirstPlayer(){
@@ -52,7 +52,7 @@ class App extends React.Component {
         return (
             <div className="wrapper">
                 <Header/>
-                <Board handleTileClick = {this.handleTileClick}/>
+                <Board playerSymbol = {this.state.playerSymbol} handleTileClick = {this.handleTileClick}/>
                 {this.state.notification}
             </div>
         );

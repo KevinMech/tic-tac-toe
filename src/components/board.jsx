@@ -2,17 +2,13 @@ import React from 'react';
 import Tile from './tile.jsx';
 
 class Board extends React.Component {
-    constructor(){
-        super();
-        this.handleClick = this.handleClick.bind(this);
-    }
-    handleClick(){
-        console.log('click');
+    constructor(props){
+        super(props);
     }
     render(){
         return (
             <div className="board">
-                <Tile key='1' onClick={() => console.log('click')}/>
+                <Tile tile='1' playerSymbol={this.props.playerSymbol} handleTileClick={this.props.handleTileClick}/>
                 <Tile key='2'/>
                 <Tile key='3'/>
                 <Tile key='4'/>

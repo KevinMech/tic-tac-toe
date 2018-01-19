@@ -6,8 +6,8 @@ class Selector extends React.Component {
             <div>
                 <p>Please select player symbol: </p>
                 <div className="selector">
-                    <button className='itemo' onClick={() => this.props.handleSelection('o')}>O</button>
-                    <button className='itemx' onClick={() => this.props.handleSelection('x')}>X</button>
+                    <button className='itemo' onClick={() => this.props.handleSymbolSelection('O')}>O</button>
+                    <button className='itemx' onClick={() => this.props.handleSymbolSelection('X')}>X</button>
                 </div>
             </div>
         );
