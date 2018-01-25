@@ -1,4 +1,4 @@
-import React from 'react';
+oimport React from 'react';
 
 class Tile extends React.Component {
     constructor(props){
@@ -12,14 +12,14 @@ class Tile extends React.Component {
     }
 
     handleClick(){
-        this.setState({symbol: this.props.playerSymbol});
+        this.setState({symbol:'X'});
+        this.props.handleTileClick();
     }
 
     render(){
         let id = this.state.id;
         return (
-            <div onClick={() => {this.props.handleTileClick();
-                this.handleClick();}}>
+            <div onClick={this.handleClick}>
                 <p>{this.state.symbol}</p>
             </div>
         )
