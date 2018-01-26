@@ -19,6 +19,7 @@ class App extends React.Component {
 
         this.state = {
             playerSymbol: null,
+            board: Array(9).fill(null),
             playersTurn: false,
             notification: this.notification.selectSymbol
         }
@@ -30,7 +31,11 @@ class App extends React.Component {
     }
 
     handleTileClick(tile){
-        console.log('click');
+        console.log(tile);
+        let temp = this.state.board;
+        temp[tile] = this.state.playerSymbol;
+        this.setState({board: temp});
+        console.log(temp);
     }
 
     selectFirstPlayer(){
@@ -52,7 +57,7 @@ class App extends React.Component {
         return (
             <div className="wrapper">
                 <Header/>
-                <Board playerSymbol = {this.state.playerSymbol} handleTileClick = {this.handleTileClick}/>
+                <Board playerSymbol = {this.state.playerSymbol} board = {this.state.board} handleTileClick = {this.handleTileClick}/>
                 {this.state.notification}
             </div>
         );

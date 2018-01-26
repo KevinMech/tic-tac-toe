@@ -1,29 +1,20 @@
 import React from 'react';
 import Tile from './tile.jsx';
 
-class Board extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            board: []
-        }
-    }
-
-    componentDidMount(){
-        let tiles = [];
-        for(let i = 0; i < 9; i++){
-            tiles.push(<Tile key={i} tile={i} playerSymbol={this.props.playerSymbol} handleTileClick={this.props.handleTileClick}/>);
-        }
-        this.setState({board: tiles});
-    }
-
-    render(){
-        return (
-            <div className="board">
-                {this.state.board}
-            </div>
-        );
-    }
+let Board = (props) => {
+    return (
+        <div className="board">
+            <Tile tile={0} board = {props.board} playerSymbol={props.playerSymbol} handleTileClick={(tile) => {props.handleTileClick(tile)}}/>
+            <Tile tile={1} board = {props.board} playerSymbol={props.playerSymbol} handleTileClick={(tile) => {props.handleTileClick(tile)}}/>
+            <Tile tile={2} board = {props.board} playerSymbol={props.playerSymbol} handleTileClick={(tile) => {props.handleTileClick(tile)}}/>
+            <Tile tile={3} board = {props.board} playerSymbol={props.playerSymbol} handleTileClick={(tile) => {props.handleTileClick(tile)}}/>
+            <Tile tile={4} board = {props.board} playerSymbol={props.playerSymbol} handleTileClick={(tile) => {props.handleTileClick(tile)}}/>
+            <Tile tile={5} board = {props.board} playerSymbol={props.playerSymbol} handleTileClick={(tile) => {props.handleTileClick(tile)}}/>
+            <Tile tile={6} board = {props.board} playerSymbol={props.playerSymbol} handleTileClick={(tile) => {props.handleTileClick(tile)}}/>
+            <Tile tile={7} board = {props.board} playerSymbol={props.playerSymbol} handleTileClick={(tile) => {props.handleTileClick(tile)}}/>
+            <Tile tile={8} board = {props.board} playerSymbol={props.playerSymbol} handleTileClick={(tile) => {props.handleTileClick(tile)}}/>
+        </div>
+    );
 }
 
 export default Board;

@@ -1,30 +1,12 @@
 import React from 'react';
 
-class Tile extends React.Component {
-    constructor(props){
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
+let Tile = (props) => {
 
-        this.state = {
-            id: this.props.tile,
-            symbol: null
-        }
-    }
-
-    handleClick(){
-        this.setState({symbol: this.props.playerSymbol});
-    }
-
-    render(){
-        let id = this.state.id;
-        return (
-            <div onClick={() => {this.props.handleTileClick();
-                this.handleClick();}}>
-                <p>{this.state.symbol}</p>
-            </div>
-        )
-    }
-
+    return ( 
+        <div onClick={() => props.handleTileClick(props.tile)}>
+            <p> {props.board[props.tile]} </p>
+        </div>
+    );
 }
 
 export default Tile;
