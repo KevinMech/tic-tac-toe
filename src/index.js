@@ -10,11 +10,14 @@ class App extends React.Component {
         super();
         this.handleSymbolSelection = this.handleSymbolSelection.bind(this);
         this.handleTileClick = this.handleTileClick.bind(this);
+        this.playersTurn = this.playersTurn.bind(this);
+        this.computersTurn = this.computersTurn.bind(this);
         
         //enum for notification box options
         this.notification = {
             selectSymbol: <Selector handleSymbolSelection = {this.handleSymbolSelection}/>,
-            yourturn: <Notification text = {"Your Turn!"}/>
+            yourturn: <Notification css = {"notifPlayer"} text = {"Your Turn!"}/>,
+            computersturn: <Notification css = {"notifComputer"} text = {"Computers turn..."}/>
         }
 
         this.state = {
@@ -31,11 +34,12 @@ class App extends React.Component {
     }
 
     handleTileClick(tile){
-        console.log(tile);
-        let temp = this.state.board;
-        temp[tile] = this.state.playerSymbol;
-        this.setState({board: temp});
-        console.log(temp);
+        if(this.state.playersTurn){
+            let temp = this.state.board;
+            temp[tile] = this.state.playerSymbol;
+            this.setState({board: temp});
+            this.computersTurn();
+        }
     }
 
     selectFirstPlayer(){
@@ -45,12 +49,24 @@ class App extends React.Component {
     }
 
     playersTurn(){
-        this.setState({playersTurn: true,
+        this.setState({playersTurn: true, 
             notification: this.notification.yourturn});
     }
 
     computersTurn(){
-        console.log('computer');
+        this.setState({playersTurn: false, 
+            notification: this.notification.computersturn});
+        let temp = this.state.board;
+        let availablespace = [];
+        for(let i = 0; i < temp.length; i++){
+            if(this.state.board[i] === null) availablespace.push(i);
+        }
+        let rand = Math.floor(Math.random() * availablespace.length);
+        let space = availablespace[rand];
+        if(this.state.playerSymbol === 'X') temp[space] = 'O';
+        else temp[space] = 'X';
+        this.setState({board: temp});
+        this.playersTurn();
     }
 
     render(){

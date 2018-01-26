@@ -1,8 +1,9 @@
 import React from 'react';
 
 const Notification = (props) => {
+
     return(
-        <div className="notification"> 
+        <div className={props.css}> 
             <p> {props.text}</p>
         </div>
     );

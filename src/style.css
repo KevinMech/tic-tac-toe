@@ -72,12 +72,24 @@
     background-color: #FEC606;
 }
 
-.notification {
+.notifPlayer {
     display: flex;
     justify-content: center;
     align-items: center;
 
     background-color: #71BA51;
+    width: 500px;
+    height: 50px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.notifComputer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #eb4d4b;
     width: 500px;
     height: 50px;
     border: 1px solid;
