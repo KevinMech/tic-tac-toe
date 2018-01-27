@@ -16,14 +16,14 @@ class App extends React.Component {
         super();
         this.handleSymbolSelection = this.handleSymbolSelection.bind(this);
         this.handleTileClick = this.handleTileClick.bind(this);
-        this.playersTurn = this.playersTurn.bind(this);
-        this.computersTurn = this.computersTurn.bind(this);
         
         //enum for notification box options
         this.notification = {
             selectSymbol: <Selector handleSymbolSelection = {this.handleSymbolSelection} symbols ={symbol}/>,
             yourturn: <Notification css = {"notifPlayer"} text = {"Your Turn!"}/>,
-            computersturn: <Notification css = {"notifComputer"} text = {"Computers turn..."}/>
+            win: <Notification css = {"notifWin"} text = {"You win!"}/>,
+            lose: <Notification css = {"notifLose"} text = {"You Lose :("}/>,
+            draw: <Notification css = {"notifPlayer"} text = {"Draw..."}/>
         }
 
         this.state = {
@@ -45,12 +45,12 @@ class App extends React.Component {
     }
 
     handleTileClick(tile){
-        if(this.state.playersTurn){
+        if(this.state.playersTurn && this.state.board[tile] == null){
             let temp = this.state.board;
             temp[tile] = this.state.playerSymbol;
             this.setState({board: temp});
-            this.computersTurn();
-            this.victoryCondition();
+            let gameover = this.victoryCondition();
+            if(!gameover) this.computersTurn();
         }
     }
 
@@ -79,47 +79,47 @@ class App extends React.Component {
         let space = availablespace[rand];
         temp[space] = this.state.computerSymbol;
         this.setState({board: temp});
-        this.victoryCondition();
-        this.playersTurn();
+        let gameover = this.victoryCondition();
+        if(!gameover) this.playersTurn();
     }
 
     victoryCondition(){
-        let board = this.state.board;
+        let gameover = false;
 
         //check each row for victory condition
         for(let i = 0; i < 3; i+=3){
             if(this.state.board[i] === this.state.playerSymbol && this.state.board[i+1] === this.state.playerSymbol && this.state.board[i+2] === this.state.playerSymbol){
-                console.log('row win');
+                gameover = this.gameOver(true, false);
             }
             else if(this.state.board[i] === this.state.computerSymbol && this.state.board[i+1] === this.state.computerSymbol && this.state.board[i+2] === this.state.computerSymbol){
-                console.log('row lost');
+                gameover = this.gameOver(false, false);
             }
         }
 
         //check each column for victory condition
         for(let i = 0; i < 3; i++){
             if(this.state.board[i] === this.state.playerSymbol && this.state.board[i+3] === this.state.playerSymbol && this.state.board[i+6] === this.state.playerSymbol){
-                console.log('column win');
+                gameover = this.gameOver(true, false);
             }
             if(this.state.board[i] === this.state.computerSymbol && this.state.board[i+3] === this.state.computerSymbol && this.state.board[i+6] === this.state.computerSymbol){
-                console.log('column lose');
+                gameover = this.gameOver(false, false);
             }
         }
 
         //Check top-left Diagnol for victory condition
         if(this.state.board[0] === this.state.playerSymbol && this.state.board[4] === this.state.playerSymbol && this.state.board[8] === this.state.playerSymbol){
-            console.log('diagnol win');
+            gameover = this.gameOver(true, false);
         }
         else if(this.state.board[0] === this.state.computerSymbol && this.state.board[4] === this.state.computerSymbol && this.state.board[8] === this.state.computerSymbol){
-            console.log('diagnol lose');
+            gameover = this.gameOver(false, false);
         }
 
         //Check top-right diagnol for victory condition
         if(this.state.board[2] === this.state.playerSymbol && this.state.board[4] === this.state.playerSymbol && this.state.board[6] === this.state.playerSymbol){
-            console.log('diagnol win');
+            gameover = this.gameOver(true, false);
         }
         else if(this.state.board[2] === this.state.computerSymbol && this.state.board[4] === this.state.computerSymbol && this.state.board[6] === this.state.computerSymbol){
-            console.log('diagnol lose');
+            gameover = this.gameOver(false, false)
         }
 
         //check for draw
@@ -127,11 +127,15 @@ class App extends React.Component {
         for(let i = 0; i < this.state.board.length; i++){
             if(this.state.board[i] === null) availablespace.push(i);
         }
-        if(availablespace.length === 0) console.log('draw');
+        if(!gameover && availablespace.length === 0) this.gameOver(false, true);
+        return gameover;
     }
 
     gameOver(win, draw){
-        
+        if(win) this.setState({notification: this.notification.win});
+        else if(!win && !draw) this.setState({notification: this.notification.lose});
+        else if(draw) this.setState({notification: this.notification.draw});
+        return true;
     }
 
     render(){
