@@ -1,17 +1,15 @@
 import React from 'react';
 
-class Selector extends React.Component {
-    render(){
-        return(
-            <div>
-                <p>Please select player symbol: </p>
-                <div className="selector">
-                    <button className='itemo' onClick={() => this.props.handleSymbolSelection('O')}>O</button>
-                    <button className='itemx' onClick={() => this.props.handleSymbolSelection('X')}>X</button>
-                </div>
+const Selector = (props) => {
+    return(
+        <div>
+            <p>Please select player symbol: </p>
+            <div className="selector">
+                <button className='itemo' onClick={() => props.handleSymbolSelection(props.symbols.O)}>O</button>
+                <button className='itemx' onClick={() => props.handleSymbolSelection(props.symbols.X)}>X</button>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default Selector;
