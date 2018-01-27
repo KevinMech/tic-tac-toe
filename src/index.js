@@ -73,7 +73,7 @@ class App extends React.Component {
         let temp = this.state.board;
         let availablespace = [];
         for(let i = 0; i < temp.length; i++){
-            if(this.state.board[i] === null) availablespace.push(i);
+            if(temp[i] === null) availablespace.push(i);
         }
         let rand = Math.floor(Math.random() * availablespace.length);
         let space = availablespace[rand];
@@ -106,7 +106,7 @@ class App extends React.Component {
             }
         }
 
-        //Check Diagnols for victory condition
+        //Check top-left Diagnol for victory condition
         if(this.state.board[0] === this.state.playerSymbol && this.state.board[4] === this.state.playerSymbol && this.state.board[8] === this.state.playerSymbol){
             console.log('diagnol win');
         }
@@ -114,13 +114,20 @@ class App extends React.Component {
             console.log('diagnol lose');
         }
 
-        //Check Diagnols for victory condition
+        //Check top-right diagnol for victory condition
         if(this.state.board[2] === this.state.playerSymbol && this.state.board[4] === this.state.playerSymbol && this.state.board[6] === this.state.playerSymbol){
             console.log('diagnol win');
         }
         else if(this.state.board[2] === this.state.computerSymbol && this.state.board[4] === this.state.computerSymbol && this.state.board[6] === this.state.computerSymbol){
             console.log('diagnol lose');
         }
+
+        //check for draw
+        let availablespace = [];
+        for(let i = 0; i < this.state.board.length; i++){
+            if(this.state.board[i] === null) availablespace.push(i);
+        }
+        if(availablespace.length === 0) console.log('draw');
     }
 
     gameOver(win, draw){
